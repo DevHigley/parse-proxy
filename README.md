@@ -1,5 +1,4 @@
-# parse-proxy
-
+# parse-proxy [![Build Status](https://travis-ci.com/DevHigley/parse-proxy.svg?branch=master)](https://travis-ci.com/DevHigley/parse-proxy)
 ## Description
 
 parse-proxy is a lightweight Node.js proxy string parsing library
