@@ -1,9 +1,10 @@
 # parse-proxy [![Build Status](https://travis-ci.com/DevHigley/parse-proxy.svg?branch=master)](https://travis-ci.com/DevHigley/parse-proxy)
+
 ## Description
 
 parse-proxy is a lightweight Node.js proxy string parsing library
 
-What does it do:
+### What it does:
 
 -   parses a string of proxies into an array of proxy objects
 -   supports multiple delimiters (comma, newline, space)
