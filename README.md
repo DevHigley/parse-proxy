@@ -18,25 +18,29 @@ yarn add @devhigley/parse-proxy
 ```
 
 ## Usage
-
+### Basic example delimited by comma and space:
 ```js
-const parse = require("@devhigley/parse-proxy");
+const parseProxy = require("@devhigley/parse-proxy");
 
-//basic example
-parse(`1.1.1.1:80, 2.2.2.2:80, 3.3.3.3:80`)
-
-//result
+parseProxy(`1.1.1.1:80, 2.2.2.2:80, 3.3.3.3:80`);
+```
+#### Result:
+```js
 [
   { host: '1.1.1.1', port: 80, protocol: 'http' },
   { host: '2.2.2.2', port: 80, protocol: 'http' },
   { host: '3.3.3.3', port: 80, protocol: 'http' }
 ]
+```
+### Example with protocol and authentication, delimited by new line:
+```js
+const parseProxy = require("@devhigley/parse-proxy");
 
-//example with protocol and authentication
-parse(`https://user:pass@104.236.55.48:8080
-       https://user:pass@213.105.29.14:3128`)
-
-//result
+parseProxy(`https://user:pass@104.236.55.48:8080
+            https://user:pass@213.105.29.14:3128`);
+```
+#### Result:
+```js
 [
   {
     host: '104.236.55.48',
