@@ -40,15 +40,15 @@ parse(`https://user:pass@104.236.55.48:8080
 [
   {
     host: '104.236.55.48',
-    port: 8080
+    port: 8080,
     protocol: 'https',
-    auth: { username: 'user', password: 'pass' },
+    auth: { username: 'user', password: 'pass' }
   },
   {
     host: '213.105.29.14',
-    port: 3128
+    port: 3128,
     protocol: 'https',
-    auth: { username: 'user', password: 'pass' },
+    auth: { username: 'user', password: 'pass' }
   }
 ]
 ```
