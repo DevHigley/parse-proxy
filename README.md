@@ -34,18 +34,18 @@ parse(`1.1.1.1:80, 2.2.2.2:80, 3.3.3.3:80`)
 
 //example with protocol and authentication
 parse(`https://user:pass@104.236.55.48:8080
-	   https://user:pass@213.105.29.14:3128`)
+       https://user:pass@213.105.29.14:3128`)
 
 //result
 [
   {
-	host: '104.236.55.48',
+    host: '104.236.55.48',
     port: 8080
     protocol: 'https',
     auth: { username: 'user', password: 'pass' },
   },
   {
-	host: '213.105.29.14',
+    host: '213.105.29.14',
     port: 3128
     protocol: 'https',
     auth: { username: 'user', password: 'pass' },
