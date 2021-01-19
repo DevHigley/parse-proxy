@@ -1,4 +1,4 @@
-const parse = require("./dist/index");
+const parse = require("../dist/index");
 
 test("test single proxy uri", () => {
 	expect(parse("1.1.1.1:80")).toEqual([{ host: "1.1.1.1", port: 80, protocol: "http" }]);
