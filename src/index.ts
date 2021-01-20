@@ -34,7 +34,7 @@ function stringToProxy(string: string): Proxy {
 		host: url.hostname,
 		port: url.port ? parseInt(url.port) : 80,
 		protocol: url.protocol.slice(0, -1),
-		auth: url.username ? { username: url.username, password: url.password } : undefined
+		...(url.username && { auth: { username: url.username, password: url.password } })
 	};
 }
 
