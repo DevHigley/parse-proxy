@@ -1,7 +1,7 @@
 interface Proxy {
     host: string;
     port: number;
-    protocol?: string;
+    protocol: string;
     auth?: {
         username: string;
         password: string;

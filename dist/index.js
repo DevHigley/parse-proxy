@@ -28,6 +28,6 @@ function fixProxyString(string) {
 }
 function stringToProxy(string) {
     var url = new URL(string);
-    return __assign({ host: url.hostname, port: url.port ? parseInt(url.port) : 80, protocol: url.protocol.slice(0, -1) }, (url.username && { auth: { username: url.username, password: url.password } }));
+    return __assign({ host: url.hostname, port: url.port ? parseInt(url.port) : 80, protocol: url.protocol.slice(0, -1) }, (url.username && { auth: { username: url.username.replace("%40", "@"), password: url.password } }));
 }
 module.exports = parse;
