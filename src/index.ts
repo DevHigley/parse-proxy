@@ -1,5 +1,3 @@
-const { URL } = require("url");
-
 interface Proxy {
 	host: string;
 	port: number;
@@ -10,33 +8,35 @@ interface Proxy {
 	};
 }
 
-function parse(string: string): Proxy[] {
-	const rawArray = stringToArray(string);
-	const fixedArray = rawArray.map((string) => fixProxyString(string));
-	const proxyArray = fixedArray.map((string) => stringToProxy(string));
-	return proxyArray;
+function parse(input: string): Proxy[] {
+	return stringToArray(input).map(stringToProxy);
 }
 
-function stringToArray(string: string): string[] {
-	return string
-		.trim()
-		.replace(/[ ,\n]+/g, ",")
-		.split(",");
+function stringToArray(input: string): string[] {
+	return input.split(/[ ,\n]+/g);
 }
 
-//If user doesnt specify protocol we'll assume its http
-function fixProxyString(string: string): string {
-	return string.includes("://") ? string : `http://${string}`;
+function stringToProxy(input: string): Proxy {
+	return { ...getAddress(input), ...getProtocol(input), ...getAuth(input) };
 }
 
-function stringToProxy(string: string): Proxy {
-	const url = new URL(string);
-	return {
-		host: url.hostname,
-		port: url.port ? parseInt(url.port) : 80, //URL ignores port 80 so we gotta do this
-		protocol: url.protocol.slice(0, -1), //URL includes colon in protocol so we slice it out
-		...(url.username && { auth: { username: url.username.replace("%40", "@"), password: url.password } }) //URL turns @ into hex for some reason so we change it back
-	};
+function getAddress(input: string): { host: string; port: number } {
+	if (input.includes("@")) input = input.substring(input.lastIndexOf("@") + 1);
+	else if (input.includes("://")) input = input.split("://")[1];
+	const [host, port] = input.split(":");
+	return { host: host, port: parseInt(port) };
+}
+
+function getProtocol(input: string): { protocol: string } {
+	return input.includes("://") ? { protocol: input.split("://")[0] } : { protocol: "http" };
+}
+
+function getAuth(input: string): { auth: { username: string; password: string } } | undefined {
+	if (!input.includes("@")) return undefined;
+	if (input.includes("://")) input = input.split("://")[1];
+	input = input.substring(0, input.lastIndexOf("@"))
+	const [username, password] = input.split(":");
+	return { auth: { username, password } };
 }
 
 export = parse;
